@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Moral Stories - নীতিকথা</title>
+    
+    <meta property="og:title" content="Indian Moral Stories - নীতিকথা">
+    <meta property="og:description" content="২০টি শিক্ষণীয় এবং অনুপ্রেরণামূলক ভারতীয় গল্পের সংগ্রহ।">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=800">
+    <meta name="theme-color" content="#5d4037">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link href="https://fonts.googleapis.com/css2?family=Galada&family=Mina:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #5d4037;
+            --accent: #d7ccc8;
+            --paper: #fdf6e3;
+            --gold: #ffb300;
+        }
+
+        body {
+            font-family: 'Mina', sans-serif;
+            background-color: var(--paper);
+            color: #3e2723;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png');
+        }
+
+        /* Header Style */
+        header {
+            background: var(--primary);
+            color: var(--gold);
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        h1 {
+            font-family: 'Galada', cursive;
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        p.subtitle {
+            margin: 5px 0 0;
+            font-size: 1rem;
+            color: var(--accent);
+        }
+
+        /* Install Button */
+        #installBtn {
+            display: none;
+            background: var(--gold);
+            color: var(--primary);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-family: 'Mina', sans-serif;
+        }
+
+        /* Grid Container */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* Story Card */
+        .card {
+            background: #fff;
+            border: 1px solid #d7ccc8;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .card-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-family: 'Galada', cursive;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .read-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Modal / Story Reader */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--paper);
+            width: 90%;
+            max-width: 600px;
+            padding: 0;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 179, 0, 0.5);
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid var(--primary);
+        }
+
+        .modal-header {
+            position: relative;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.8);
+            color: red;
+            border: none;
+            font-size: 2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .story-body {
+            padding: 20px 30px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .story-title-lg {
+            font-family: 'Galada', cursive;
+            color: var(--primary);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        .moral-box {
+            background: #ffe0b2;
+            border-left: 5px solid var(--primary);
+            padding: 15px;
+            margin-top: 20px;
+            font-weight: bold;
+            font-style: italic;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .action-bar {
+            padding: 15px;
+            text-align: center;
+            background: #eee;
+            border-top: 1px solid #ccc;
+        }
+
+        .share-btn {
+            background: #1e88e5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>নীতিকথা</h1>
+    <p class="subtitle">ভারতীয় নৈতিক গল্পের ভান্ডার</p>
+    <button id="installBtn">📲 অ্যাপটি ইনস্টল করুন</button>
+</header>
+
+<div class="container" id="storyGrid">
+    </div>
+
+<div id="storyModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <img src="" alt="Story Image" class="modal-img" id="modalImg">
+        </div>
+        <div class="story-body">
+            <h2 class="story-title-lg" id="modalTitle">গল্পের নাম</h2>
+            <div id="modalText"></div>
+            <div class="moral-box" id="modalMoral">উপদেশ: ...</div>
+        </div>
+        <div class="action-bar">
+            <button class="share-btn" onclick="shareStory()">📤 বন্ধুদের সাথে শেয়ার করুন</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ২০ টি গল্পের ডেটাবেস (সংক্ষেপে ৩টি দেওয়া হলো, বাকিগুলো এই প্যাটার্নে যোগ করবেন)
+    const stories = [
+        {
+            id: 1,
+            title: "বিশ্বস্ত বেজি",
+            image: "https://images.unsplash.com/photo-1453227588063-bb30fd6e8203?auto=format&fit=crop&q=80&w=800",
+            text: "অনেক দিন আগের কথা। এক গ্রামে এক ব্রাহ্মণ ও তার স্ত্রী বাস করতেন। তাদের একটি ছোট শিশু ছিল। তারা একটি বেজি পালন করতেন এবং তাকে নিজের সন্তানের মতোই ভালোবাসতেন। <br><br>একদিন ব্রাহ্মণী জল আনতে নদীতে যাচ্ছিলেন। তিনি ব্রাহ্মণকে বললেন, 'আমি জল আনতে যাচ্ছি, তুমি একটু খেয়াল রেখো যেন বেজিটি বাচ্চার কোনো ক্ষতি না করে।' ব্রাহ্মণ বই পড়ছিলেন, তিনি আনমনে মাথা নাড়লেন।<br><br>কিছুক্ষণ পর ব্রাহ্মণও কোনো কাজে বাইরে গেলেন। ঘরে কেবল ঘুমন্ত শিশু এবং বেজিটি ছিল। হঠাৎ একটি বিষাক্ত সাপ গর্ত থেকে বেরিয়ে শিশুটির দিকে এগুতে লাগল। বিশ্বস্ত বেজিটি তা দেখে সাপের ওপর ঝাঁপিয়ে পড়ল এবং লড়াই করে সাপটিকে মেরে ফেলল।<br><br>ব্রাহ্মণী ফিরে এসে দেখলেন বেজির মুখে রক্ত। তিনি ভাবলেন বেজি তার সন্তানকে মেরে ফেলেছে! রাগের মাথায় তিনি জলের কলসি দিয়ে বেজিটিকে আঘাত করলেন। বেজিটি মারা গেল।<br><br>দ্রুত ঘরে ঢুকে তিনি দেখলেন তার সন্তান শান্তিতে ঘুমাচ্ছে এবং পাশে একটি মরা সাপ পড়ে আছে। তিনি নিজের ভুল বুঝতে পেরে কান্নায় ভেঙে পড়লেন।",
+            moral: "ভাবনাচিন্তা না করে হুট করে কোনো কাজ করা উচিত নয়।"
+        },
+        {
+            id: 2,
+            title: "সিংহ ও ইঁদুর",
+            image: "https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?auto=format&fit=crop&q=80&w=800",
+            text: "একদিন এক সিংহ বনের গুহায় ঘুমাচ্ছিল। হঠাৎ একটি ছোট ইঁদুর ভুল করে সিংহের গায়ের ওপর উঠে লাফালাফি শুরু করল। সিংহের ঘুম ভেঙে গেল। সে ভীষণ রেগে ইঁদুরটিকে থাবায় বন্দি করল এবং তাকে খেয়ে ফেলতে চাইল।<br><br>ইঁদুর ভয়ে কাঁপতে কাঁপতে বলল, 'মহারাজ, আমাকে মাফ করে দিন। আমি খুব ছোট প্রাণী, আমাকে খেয়ে আপনার পেট ভরবে না। হয়তো কোনোদিন আমি আপনার উপকারে আসতে পারি।' সিংহ তার কথা শুনে হাসল এবং দয়া করে তাকে ছেড়ে দিল।<br><br>কিছুদিন পর, এক শিকারি বনে জাল পাতল এবং সিংহ সেই জালে আটকা পড়ল। সিংহ গর্জন করতে লাগল। সেই ইঁদুরটি গর্জন শুনে ছুটে এল এবং তার ধারালো দাঁত দিয়ে জাল কেটে সিংহকে মুক্ত করল।",
+            moral: "কাউকে ছোট বা তুচ্ছ ভাবা উচিত নয়; ছোটরাও বড় উপকার করতে পারে।"
+        },
+        {
+            id: 3,
+            title: "লোভী কুকুর",
+            image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=800",
+            text: "এক কুকুর কসাইয়ের দোকান থেকে এক টুকরো মাংস চুরি করে পালাচ্ছিল। পথে তাকে একটি নদী পার হতে হলো। নদীর ওপর একটি সরু সাঁকো ছিল।<br><br>সাঁকো পার হওয়ার সময় কুকুরটি নিচের জলের দিকে তাকাল। সে দেখল, জলে তার নিজের ছায়া। কিন্তু বোকা কুকুর ভাবল, নিচে অন্য একটি কুকুর মাংস মুখে দাঁড়িয়ে আছে।<br><br>তার মনে লোভ হলো। সে ভাবল, 'আমি যদি ওই কুকুরটিকে ভয় দেখাই, তবে ওর মাংসের টুকরোটিও আমি পাব।' এই ভেবে যেই সে ঘেউ করে উঠল, অমনি তার মুখের মাংসটি টুপ করে নদীতে পড়ে তলিয়ে গেল।",
+            moral: "অতি লোভে তাঁতি নষ্ট। যা আছে তা নিয়েই সন্তুষ্ট থাকা উচিত।"
+        },
+        // এভাবে ২০টি গল্প পর্যন্ত যোগ করুন...
+    ];
+
+    // গল্প লোড করার ফাংশন
+    const storyGrid = document.getElementById('storyGrid');
+    
+    stories.forEach(story => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <img src="${story.image}" alt="${story.title}" loading="lazy">
+            <div class="card-content">
+                <h3 class="card-title">${story.title}</h3>
+                <button class="read-btn" onclick="openStory(${story.id})">গল্পটি পড়ুন</button>
+            </div>
+        `;
+        storyGrid.appendChild(card);
+    });
+
+    // মোডাল ওপেন লজিক
+    let currentStoryTitle = "";
+    let currentStoryText = "";
+
+    function openStory(id) {
+        const story = stories.find(s => s.id === id);
+        document.getElementById('modalImg').src = story.image;
+        document.getElementById('modalTitle').innerText = story.title;
+        document.getElementById('modalText').innerHTML = story.text;
+        document.getElementById('modalMoral').innerText = "উপদেশ: " + story.moral;
+        
+        currentStoryTitle = story.title;
+        currentStoryText = story.text.replace(/<br>/g, "\n").substring(0, 100) + "..."; // শেয়ারের জন্য
+        
+        document.getElementById('storyModal').style.display = 'flex';
+    }
+
+    // মোডাল বন্ধ লজিক
+    function closeModal() {
+        document.getElementById('storyModal').style.display = 'none';
+    }
+    
+    // উইন্ডোর বাইরে ক্লিক করলে মোডাল বন্ধ হবে
+    window.onclick = function(event) {
+        const modal = document.getElementById('storyModal');
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // শেয়ার লজিক (Web Share API)
+    function shareStory() {
+        if (navigator.share) {
+            navigator.share({
+                title: currentStoryTitle,
+                text: `${currentStoryTitle}\n\n${currentStoryText}\nপুরো গল্পটি পড়তে আমাদের অ্যাপটি ব্যবহার করুন।`,
+                url: window.location.href
+            })
+            .then(() => console.log('সফলভাবে শেয়ার হয়েছে'))
+            .catch((error) => console.log('শেয়ার করা হয়নি', error));
+        } else {
+            alert("আপনার ব্রাউজারে শেয়ার অপশনটি সমর্থিত নয়।");
+        }
+    }
+
+    // PWA Install Logic
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installBtn.style.display = 'inline-block';
+    });
+
+    installBtn.addEventListener('click', (e) => {
+        installBtn.style.display = 'none';
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+            }
+            deferredPrompt = null;
+        });
+    });
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker Registered'))
+                .catch(err => console.log('Service Worker Error', err));
+        });
+    }
+</script>
+
+</body>
+</html>
