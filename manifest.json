@@ -1,0 +1,21 @@
+{
+  "name": "Indian Moral Stories",
+  "short_name": "নীতিকথা",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fdf6e3",
+  "theme_color": "#5d4037",
+  "description": "সেরা ২০টি ভারতীয় শিক্ষণীয় গল্প",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3408/3408506.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3408/3408506.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
